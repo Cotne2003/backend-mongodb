@@ -34,9 +34,10 @@ notesRouter.post("/", (req, res) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
+    date: new Date(),
   });
   note.save().then((savedNote) => {
-    res.json(savedNote);
+    res.status(201).json(savedNote);
   });
 });
 

@@ -12,6 +12,7 @@ mongoose.connect(url);
 const noteSchema = new Schema({
   content: String,
   important: Boolean,
+  date: Date,
 });
 
 noteSchema.set("toJSON", {
