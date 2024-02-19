@@ -9,6 +9,7 @@ app.use("/api/notes", notesRouter);
 
 app.get("/", (req, res) => {
   res.send("<h1>Notes app</h1>");
+  console.log("test");
 });
 
 const PORT = 3000;
