@@ -2,6 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const notesRouter = require("./controllers/notes");
+const config = require("./utils/config");
+const logger = require("./utils/logger");
 
 app.use(cors());
 app.use(express.json());
@@ -12,7 +14,8 @@ app.get("/", (req, res) => {
   console.log("test");
 });
 
-const PORT = 3000;
-app.listen(PORT, () => {
-  console.log("started on 3000");
+app.listen(config.PORT, () => {
+  logger.info(`started on ${config.PORT}`);
 });
+
+module.exports = app;

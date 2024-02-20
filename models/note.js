@@ -1,13 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+const config = require("../utils/config");
 
 mongoose.set("strictQuery", false);
 
-const password = "mongo-password";
-
-const url = `mongodb+srv://Cotniko:${password}@cluster0.kf8vzki.mongodb.net/noteApp?retryWrites=true&w=majority`;
-
-mongoose.connect(url);
+mongoose.connect(config.MONGODB_URI);
 
 const noteSchema = new Schema({
   content: String,
