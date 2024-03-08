@@ -1,5 +1,6 @@
 const express = require("express");
 const Note = require("../models/note");
+const User = require("../models/user");
 
 const notesRouter = express.Router();
 
@@ -8,23 +9,30 @@ notesRouter.get("/", async (req, res) => {
   res.json(notes);
 });
 
-notesRouter.get("/:id", async (req, res) => {
-  const note = await Note.findById(req.params.id);
-  if (note) {
-    res.json(note);
-  } else {
-    res.status(404).end();
-  }
+notesRouter.get("/:id", async (req, res, next) => {
+  Note.findById(req.params.id)
+    .then((note) => {
+      if (note) {
+        res.json(note);
+      } else {
+        res.status(404).end();
+      }
+    })
+    .catch((error) => next(error));
 });
 
-notesRouter.post("/", async (req, res, next) => {
+notesRouter.post("/", async (req, res) => {
   body = req.body;
+
+  const user = await User.findById(body.userId);
 
   const note = new Note({
     content: body.content,
     important: body.important || false,
+    user: user.id,
   });
   const savedNote = await note.save();
+  await user.save();
   res.status(201).json(savedNote);
 });
 
