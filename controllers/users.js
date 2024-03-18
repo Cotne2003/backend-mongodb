@@ -14,6 +14,7 @@ usersRouter.post("/", async (req, res) => {
     name,
     passwordHash,
   });
+  console.log("hello");
 
   const savedUser = await user.save();
   res.status(201).json(savedUser);
