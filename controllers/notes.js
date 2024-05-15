@@ -4,6 +4,12 @@ const User = require("../models/user");
 
 const notesRouter = express.Router();
 
+const users = [
+  { name: "tsotne", id: 1 },
+  { name: "giorgi", id: 2 },
+  { name: "mariami", id: 3 },
+];
+
 notesRouter.get("/", async (req, res) => {
   const notes = await Note.find({});
   res.json(notes);
