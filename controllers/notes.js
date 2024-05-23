@@ -9,17 +9,17 @@ notesRouter.get("/", async (req, res) => {
   res.json(notes);
 });
 
-notesRouter.get("/:id", async (req, res, next) => {
-  Note.findById(req.params.id)
-    .then((note) => {
-      if (note) {
-        res.json(note);
-      } else {
-        res.status(404).end();
-      }
-    })
-    .catch((error) => next(error));
-});
+// notesRouter.get("/:id", async (req, res, next) => {
+//   Note.findById(req.params.id)
+//     .then((note) => {
+//       if (note) {
+//         res.json(note);
+//       } else {
+//         res.status(404).end();
+//       }
+//     })
+//     .catch((error) => next(error));
+// });
 
 notesRouter.post("/", async (req, res) => {
   body = req.body;
